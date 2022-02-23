@@ -1,0 +1,80 @@
+How To Install Docker Compose on Linux
+
+You need curl and wget installed on your system for this operation. And definitely, access to the Terminal as a user with sudo privileges.
+
+### CentOS / RHEL ###
+sudo yum -y install curl wget
+
+### Debian / Ubuntu ###
+sudo apt update
+sudo apt install -y curl wget
+
+### Fedora ###
+sudo dnf -y install curl wget
+
+Once curl has been installed, download the latest Compose on your Linux machine.
+	curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url  | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | wget -qi -
+Make the binary file executable.
+	chmod +x docker-compose-linux-x86_64
+Move the file to your PATH.
+	sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
+Confirm version.
+	docker-compose version
+Add user to docker group:
+	sudo usermod -aG docker $USER
+	newgrp docker
+
+Configure Compose Command-line completion
+Compose has command completion for the bash and zsh shell.
+	For Bash users : Place the completion script in /etc/bash_completion.d/.
+		sudo curl -L https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+	Source the file or re-login to enjoy completion feature.	
+		source /etc/bash_completion.d/docker-compose
+	For Zsh users: Download the completion script in your ~/.zsh/completion/
+		mkdir -p ~/.zsh/completion
+		curl -L https://raw.githubusercontent.com/docker/compose/master/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+Include the directory in your $fpath by adding in ~/.zshrc:
+	fpath=(~/.zsh/completion $fpath)
+Then reload your shell:
+	exec $SHELL -l
+
+Test Docker Compose installation.
+	nano docker-compose.yml
+Add below data to the file.
+	version: '3'  
+services:
+  web:
+    image: nginx:latest
+    ports:
+     - "8080:80"
+    links:
+     - php
+  php:
+    image: php:7-fpm
+Start service containers.
+	docker-compose up -d
+Show running Containers
+	docker-compose ps
+Destroy containers
+	docker-compose stop
+	docker-compose rm -f
+
+
+
+
+
+
+
+
+
+
+
+How to Install Docker-Compose?
+
+First of all download the current stable release of Docker Compose:
+	sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+Next, update the permission to binary
+	sudo chmod +x /usr/local/bin/docker-compose	
+Finally test the installation
+	docker-compose --version
+ 
