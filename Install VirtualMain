@@ -1,0 +1,11 @@
+Install VirtualMain
+The easiest way to get the install script onto your server, is to login to your server and use wget or curl. For example:
+
+	wget https://software.virtualmin.com/gpl/scripts/install.sh
+
+For Virtualmin Professional, use the command suggested on your Software Licenses page.
+
+Run the Install Script and Configure Virtualmin
+Execute the downloaded install script using a command like the following:
+
+	sudo /bin/sh install.sh
