@@ -1,0 +1,13 @@
+#Update your system packages before installations
+	sudo apt-get update
+	sudo apt-get upgrade
+#We need to ensure that our system has a valid IP address and a fully qualified domain name. There should also be valid mx record for our domain. To set server IP and hostname, run the below commands:
+	sudo hostnamectl set-hostname mail.example.com 
+#Also add a server’s FQDN and IP address to /etc/hosts file.
+	sudo nano /etc/hosts
+	Example: 62.15.116.167 mail.example.com
+#Once set, reboot your system
+	sudo reboot
+#The following ports should be allowed through your system firewall as they are critical for emails. You can open the ports with ufw as shown below:	
+	sudo ufw allow proto tcp from any to any port 25,80,443,110,143,465,587,993,995
+	sudo ufw allow 25,80,443,110,143,465,587,993,995/tcp
