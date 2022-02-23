@@ -1,0 +1,35 @@
+Now, docker and docker-compose ins
+talled, it’s time to install Mailu.
+
+Mailu has made it super easy to generate bin file that you will need to install mail server. Simply go to following link and fill the details as follows.
+
+https://setup.mailu.io/
+On following screen select compose
+
+Create Mailu Directory
+
+After installing Docker and Docker Compose, proceed to create a directory where mailu will store its data.
+	sudo mkdir /mailu
+	
+First command is to make directory.
+	sudo mkdir /mailu
+
+Now, download the configuration files you generated
+
+	cd /mailu
+	wget http://setup.mailu.io/1.7/file/f9c808a6-ec48-4499-b4da-346deb0480f3/docker-compose.yml
+	wget http://setup.mailu.io/1.7/file/f9c808a6-ec48-4499-b4da-346deb0480f3/mailu.env
+
+Then, review the configuration files. First open docker.yml file
+	nano docker-compose.yml
+
+Next open mailu.env
+	nano mailu.env
+
+Here change the SECRET_KEY. You can generate secret key on command line itself. Also, you can do few other changes as well as per your need.
+	apt install pwgen
+	pwgen 16
+
+Finally, compose the project with following command
+	export MAILU_VERSION=1.8
+	docker-compose -p mailu up -d
