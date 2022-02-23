@@ -1,0 +1,19 @@
+Installing CyberPanel
+
+First of all switch to root user
+
+	sudo -i
+	
+The next step is to update the OS.
+
+	apt update -y
+	
+After that upgrade the packages using the following command.
+
+	apt upgrade -y
+
+Now next command will begin the installation of CyberPanel.
+
+	sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh)
+	
+Following this, you will be asked a few questions, just answer them.
